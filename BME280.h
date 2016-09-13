@@ -43,13 +43,17 @@ Based on the data sheet provided by Bosch for the Bme280 environmental sensor.
 #define PRESS_DIG_ADDR 0x8E
 #define HUM_DIG_ADDR1  0xA1
 #define HUM_DIG_ADDR2  0xE1
+
+#define SLEEP_MODE     0x00
+#define FORCED_MODE    0x01
+#define NORMAL_MODE    0x11
 /* ==== END Defines ==== */
 
 
 class BME280{
 protected:
   uint8_t tempOversamplingRate, humidityOversamplingRate, pressureOversamplingRate; // B000 = Skipped, B001 = x1, B010 = x2, B011 = x4, B100 = x8, B101/other = x16
-  uint8_t mode;                               // Sleep = B00, Normal = B01 and B10, Forced = B11
+  uint8_t mode;                               // Sleep = B00, Forced = B01 and B10, Normal = B11
   uint8_t standbyTime;                        // B000 = 0.5ms, B001 = 62.5ms, B010 = 125ms, B011 = 250ms, B100 = 250ms, B101 = 1000ms, B110 = 10ms, B111 = 20ms
   uint8_t filter;                             // B000 = off, B001 = 2, B010 = 4, B011 = 8, B100/other = 16
   uint8_t controlHumidity;                    // ctrl_hum register. (ctrl_hum[2:0] = Humidity oversampling rate.)
@@ -82,7 +86,7 @@ protected:
 
 public:
   /* ==== Constructor used to create the class. All parameters have default values. ==== */
-  BME280(uint8_t tosr = 0x1, uint8_t hosr = 0x1, uint8_t posr = 0x1, uint8_t mode = 0x3,
+  BME280(uint8_t tosr = 0x1, uint8_t hosr = 0x1, uint8_t posr = 0x1, uint8_t mode = FORCED_MODE,
     uint8_t st = 0x5, uint8_t filter = 0x0, bool spiEnable = false,
     uint8_t bme_280_addr = 0x76);  // Oversampling = 1, mode = normal, standby time = 125ms, filter = none.
 
