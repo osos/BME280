@@ -46,7 +46,7 @@ Based on the data sheet provided by Bosch for the Bme280 environmental sensor.
 
 #define SLEEP_MODE     0x00
 #define FORCED_MODE    0x01
-#define NORMAL_MODE    0x11
+#define NORMAL_MODE    0x03
 /* ==== END Defines ==== */
 
 
@@ -88,7 +88,7 @@ public:
   /* ==== Constructor used to create the class. All parameters have default values. ==== */
   BME280(uint8_t tosr = 0x1, uint8_t hosr = 0x1, uint8_t posr = 0x1, uint8_t mode = FORCED_MODE,
     uint8_t st = 0x5, uint8_t filter = 0x0, bool spiEnable = false,
-    uint8_t bme_280_addr = 0x76);  // Oversampling = 1, mode = normal, standby time = 125ms, filter = none.
+    uint8_t bme_280_addr = 0x76);  // Oversampling = 1, mode = forced, standby time = 125ms, filter = none.
 
   /* ==== Method used at start up to initialize the class. Starts the I2C interface. ==== */
   bool begin();
